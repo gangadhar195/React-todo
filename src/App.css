@@ -1,0 +1,9 @@
+.todo{
+  height: 300px;
+  width: 300px;
+  background-color: antiquewhite;
+  
+}
+.todo h1{
+  text-align: center;
+}
