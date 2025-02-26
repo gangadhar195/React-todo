@@ -2,6 +2,7 @@ import React from 'react'
 import "./App.css"
 import { useState } from 'react'
 import { RiDeleteBin6Line } from "react-icons/ri";
+import Todo from './Todo';
 
 const App = () => {
   const [item,setItem] = useState([]);
@@ -9,7 +10,14 @@ const App = () => {
   const addtodo =()=>{
     setItem([...item,input])
   }
-  console.log(item)
+
+  const deleteTodo = (key)=>{
+    let newTodoList = [...item];
+    newTodoList.slice(key,1)
+    setItem([...newTodoList])
+    
+  }
+  // console.log(item)
   return ( 
     <div className='todo'>
       <div>
@@ -24,7 +32,7 @@ const App = () => {
       <div className="list">
        {item.map((n,i)=>(
 
-         <li key={i}>{n} <span><RiDeleteBin6Line /></span></li>
+         <li key={i} index={i}>{n} <span onClick={()=>deleteTodo(index)}><RiDeleteBin6Line /></span></li>
        ))}
       </div>
     </div>
