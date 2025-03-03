@@ -1,15 +1,13 @@
 import React from 'react'
-import { RiDeleteBin6Line } from "react-icons/ri";
 
-const Todo = ({list,deletetodo,index}) => {
-  
+const Todo = (props) => {
   return (
     <div>
       <div className="list">
-        <li>{list}
-            <span onClick={()=>{
-                deletetodo(index)}}
-                ><RiDeleteBin6Line /></span>
+        <li>{props.item}
+          <spam onClick={e=>{
+            props.deleteItem(props.index)
+          }}>DEL</spam>
         </li>
       </div>
     </div>

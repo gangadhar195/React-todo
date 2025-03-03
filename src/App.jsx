@@ -1,44 +1,39 @@
 import React from 'react'
-import "./App.css"
 import { useState } from 'react'
-import Todo from './Todo';
+import Todo from "./Todo"
+import "./App.css"
 
 const App = () => {
-  const [item,setItem] = useState([]);
-  const[input,setInput]=useState();
-  const addtodo =()=>{
-    setItem([...item,input])
+  const [input,setInput]=useState();
+  const [data,setData] = useState([]);
+  const Inputdata = (e)=>{
+    let item = e.target.value;
+    setInput(item)
   }
-
-  const deleteTodo = (index)=>{
-    let newTodoList = [...item];
-    newTodoList.slice(index,1)
-    setItem([...newTodoList])
+  const AddTodo = ()=>{
+    setData([...data,input]);
+    setInput("");
+   
+  }
+  const deleteIndex = (index)=>{
+    console.log(index);
     
+    const newList = [...data]
+    newList.splice(index,1);
+    setData(...newList);
   }
-  // console.log(item)
-  return ( 
-    <div className='todo'>
-      <div>
-      <h1>Todo List</h1>
-      <div className="inputdata">
-      <input type='text' placeholder='Add todo' onChange={(e)=>setInput(e.target.value)} value={input}/>
-      <button 
-      onClick={()=>
-
-      {addtodo(input) 
-        setInput("")}} >Add Todo</button>
-        </div>
+  return (
+    <div className='todo-container'>
+      <div className="todo-input">
+        <input type='text' placeholder='enter task' value={input} onChange={Inputdata}/>
+        <button onClick={AddTodo}>Add Todo</button>
       </div>
-      
-      <div className="list">
-       {item.map((list,i)=>{
-
-        //  <li key={i} index={i}>{list} <span onClick={()=>deleteTodo(index)}><RiDeleteBin6Line /></span></li>
-       return(
-        <Todo key={i} list={list} index={i} deletetodo={deleteTodo}/>
-       )
-})}
+      <div className="todo-list">
+        <p>{data.map((curValue,i)=>{
+          return(
+            <Todo key={i} index={i} item={curValue} deleteItem={deleteIndex}/>
+          )
+        })}</p>
       </div>
     </div>
   )
